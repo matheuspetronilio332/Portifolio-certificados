@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Certificados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-light: #ffffff;
+            --bg-dark: #0f0f0f;
+            --bg-gray: #f9f9f9;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border: #e0e0e0;
+        }
+
+        body.dark-mode {
+            --bg-light: #0f0f0f;
+            --bg-dark: #1a1a1a;
+            --bg-gray: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --border: #333333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem;
+            background-color: var(--bg-light);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .controls-section {
+            background-color: var(--bg-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+
+        .controls-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--bg-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        body.dark-mode .search-box input {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border-color: #444444;
+        }
+
+        body.dark-mode .search-box input:focus {
+            background-color: #333333;
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        #categoryFilter {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #categoryFilter:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        body.dark-mode #categoryFilter {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border-color: #444444;
+        }
+
+        body.dark-mode #categoryFilter:focus {
+            background-color: #333333;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-gray);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+            padding: 0.5rem;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .form-section {
+            background-color: var(--bg-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+
+        .form-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-grid input {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .form-grid input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .form-grid input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--bg-light);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        body.dark-mode .form-grid input {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border-color: #444444;
+        }
+
+        body.dark-mode .form-grid input:focus {
+            background-color: #333333;
+            border-color: var(--primary);
+        }
+
+        .file-input-wrapper {
+            grid-column: 1 / -1;
+        }
+
+        .file-input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-input-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .file-input-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .file-preview {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .pdf-preview {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-gray);
+            color: var(--text-secondary);
+            font-size: 24px;
+        }
+
+        .preview-item .remove-preview {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            grid-column: 1 / -1;
+        }
+
+        .form-actions button {
+            flex: 1;
+        }
+
+        .gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-light);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .card:hover {
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 160px;
+            background-color: var(--bg-gray);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            cursor: pointer;
+        }
+
+        .card-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card-actions .btn {
+            flex: 1;
+            font-size: 12px;
+            padding: 0.5rem 0.75rem;
+            justify-content: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-light);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-actions button {
+            flex: 1;
+        }
+
+        .file-viewer {
+            width: 100%;
+            max-height: 400px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        .file-viewer img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.error {
+            background-color: var(--danger);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+        }
+
+        @media print {
+            .header,
+            .controls-section,
+            .form-section {
+                display: none;
+            }
+
+            .gallery {
+                padding: 0;
+            }
+
+            .card-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        class CertificatePortfolio {
+            constructor() {
+                this.certificates = [];
+                this.darkMode = false;
+                this.showForm = false;
+                this.formData = {
+                    title: '',
+                    platform: '',
+                    date: '',
+                    category: '',
+                    link: '',
+                    files: []
+                };
+                this.selectedFiles = [];
+                
+                this.init();
+            }
+
+            async init() {
+                this.loadDarkMode();
+                await this.loadCertificates();
+                this.render();
+            }
+
+            loadDarkMode() {
+                try {
+                    const saved = localStorage.getItem('darkMode');
+                    if (saved) this.darkMode = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Erro ao carregar tema:', e);
+                }
+            }
+
+            saveDarkMode() {
+                try {
+                    localStorage.setItem('darkMode', JSON.stringify(this.darkMode));
+                } catch (e) {
+                    console.error('Erro ao salvar tema:', e);
+                }
+            }
+
+            async loadCertificates() {
+                try {
+                    const response = await fetch('/api/certificados');
+                    if (response.ok) {
+                        this.certificates = await response.json();
+                    } else {
+                        this.showToast('Erro ao carregar certificados', true);
+                    }
+                } catch (err) {
+                    console.error('Erro ao conectar ao servidor:', err);
+                    this.showToast('Erro ao conectar ao servidor', true);
+                }
+            }
+
+            showToast(message, isError = false) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${isError ? 'error' : ''}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+            }
+
+            toggleDarkMode() {
+                this.darkMode = !this.darkMode;
+                this.saveDarkMode();
+                document.body.classList.toggle('dark-mode', this.darkMode);
+                this.render();
+            }
+
+            toggleForm() {
+                this.showForm = !this.showForm;
+                this.formData = {
+                    title: '',
+                    platform: '',
+                    date: '',
+                    category: '',
+                    link: '',
+                    files: []
+                };
+                this.selectedFiles = [];
+                this.render();
+            }
+
+            handleFileSelect(e) {
+                const files = Array.from(e.target.files || []);
+                if (files.length === 0) return;
+
+                let pending = files.length;
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        this.selectedFiles.push({
+                            file: file,
+                            preview: event.target.result,
+                            name: file.name,
+                            type: file.type
+                        });
+                        pending--;
+                        if (pending === 0) {
+                            this.renderFilePreview();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            renderFilePreview() {
+                const wrapper = document.getElementById('filePreviewWrapper');
+                if (!wrapper) return;
+
+                if (this.selectedFiles.length === 0) {
+                    wrapper.innerHTML = '';
+                    return;
+                }
+
+                wrapper.innerHTML = `
+                    <div class="file-preview">
+                        ${this.selectedFiles.map((file, idx) => `
+                            <div class="preview-item">
+                                ${file.type.includes('image') ? 
+                                    `<img src="${file.preview}" alt="preview">` :
+                                    `<div class="pdf-preview">📄</div>`
+                                }
+                                <button type="button" class="remove-preview" data-index="${idx}">✕</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                wrapper.querySelectorAll('.remove-preview').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const index = parseInt(btn.dataset.index);
+                        this.removeFilePreview(index);
+                    });
+                });
+            }
+
+            removeFilePreview(index) {
+                this.selectedFiles.splice(index, 1);
+                this.renderFilePreview();
+            }
+
+            syncFormDataFromDOM() {
+                const titleEl = document.getElementById('titleInput');
+                const platformEl = document.getElementById('platformInput');
+                const dateEl = document.getElementById('dateInput');
+                const categoryEl = document.getElementById('categoryInput');
+                const linkEl = document.getElementById('linkInput');
+
+                if (titleEl) this.formData.title = titleEl.value;
+                if (platformEl) this.formData.platform = platformEl.value;
+                if (dateEl) this.formData.date = dateEl.value;
+                if (categoryEl) this.formData.category = categoryEl.value;
+                if (linkEl) this.formData.link = linkEl.value;
+            }
+
+            async handleAddCertificate(e) {
+                e.preventDefault();
+
+                // Lê os valores diretamente do formulário (mais confiável que eventos)
+                this.syncFormDataFromDOM();
+
+                const title = this.formData.title.trim();
+                const platform = this.formData.platform.trim();
+
+                if (!title || !platform) {
+                    this.showToast('Preencha título e plataforma!', true);
+                    return;
+                }
+
+                try {
+                    const formData = new FormData();
+                    formData.append('title', title);
+                    formData.append('platform', platform);
+                    formData.append('date', this.formData.date);
+                    formData.append('category', this.formData.category);
+                    formData.append('link', this.formData.link);
+
+                    this.selectedFiles.forEach(file => {
+                        formData.append('files', file.file);
+                    });
+
+                    const response = await fetch('/api/certificados', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const newCert = await response.json();
+                        this.certificates.unshift(newCert);
+                        this.showToast('Certificado adicionado com sucesso!');
+                        this.toggleForm();
+                        this.render();
+                    } else {
+                        const error = await response.json();
+                        this.showToast(error.error || 'Erro ao adicionar certificado', true);
+                    }
+                } catch (err) {
+                    console.error('Erro:', err);
+                    this.showToast('Erro ao adicionar certificado', true);
+                }
+            }
+
+            async deleteCertificate(id) {
+                if (!confirm('Tem certeza que deseja deletar este certificado?')) return;
+
+                try {
+                    const response = await fetch(`/api/certificados/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        this.certificates = this.certificates.filter(c => c.id !== id);
+                        this.showToast('Certificado deletado!');
+                        this.render();
+                    } else {
+                        this.showToast('Erro ao deletar certificado', true);
+                    }
+                } catch (err) {
+                    console.error('Erro:', err);
+                    this.showToast('Erro ao deletar certificado', true);
+                }
+            }
+
+            getCategories() {
+                return [...new Set(this.certificates.map(c => c.category).filter(Boolean))];
+            }
+
+            getFilteredCertificates(searchTerm, selectedCategory) {
+                return this.certificates.filter(cert => {
+                    const matchesSearch = cert.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                        cert.platform.toLowerCase().includes(searchTerm.toLowerCase());
+                    const matchesCategory = !selectedCategory || cert.category === selectedCategory;
+                    return matchesSearch && matchesCategory;
+                });
+            }
+
+            openFileViewer(cert, fileIndex) {
+                const file = cert.files[fileIndex];
+                if (!file) return;
+
+                const modal = document.getElementById('fileModal');
+                const fileViewer = document.getElementById('fileViewer');
+
+                if (file.type.includes('image')) {
+                    fileViewer.innerHTML = `<img src="${file.path}" alt="${file.originalName}">`;
+                } else if (file.type.includes('pdf')) {
+                    fileViewer.innerHTML = `
+                        <div style="text-align: center;">
+                            <p>📄 ${file.originalName}</p>
+                            <a href="${file.path}" download class="btn btn-primary" style="margin-top: 1rem;">
+                                ⬇️ Baixar PDF
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    fileViewer.innerHTML = `<div style="text-align: center; padding: 2rem;"><p>Tipo de arquivo não suportado para visualização</p></div>`;
+                }
+
+                modal.classList.add('active');
+            }
+
+            closeModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.classList.remove('active');
+            }
+
+            render() {
+                const app = document.getElementById('app');
+                if (!app) return;
+                
+                document.body.classList.toggle('dark-mode', this.darkMode);
+
+                let html = `
+                    <div class="header">
+                        <div class="header-content">
+                            <div>
+                                <h1>📜 Meu Portfólio</h1>
+                                <p>${this.certificates.length} certificado${this.certificates.length !== 1 ? 's' : ''}</p>
+                            </div>
+                            <button class="theme-toggle" id="themeToggle" title="Alternar tema">
+                                ${this.darkMode ? '☀️' : '🌙'}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="controls-section">
+                        <div class="controls-content">
+                            <div class="search-box">
+                                <span class="search-icon">🔍</span>
+                                <input type="text" id="searchInput" placeholder="Buscar certificado...">
+                            </div>
+
+                            ${this.getCategories().length > 0 ? `
+                                <select id="categoryFilter">
+                                    <option value="">Todas as categorias</option>
+                                    ${this.getCategories().map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                                </select>
+                            ` : ''}
+
+                            <button class="btn btn-primary" id="addBtn">➕ Adicionar</button>
+                            <button class="btn btn-secondary" id="printBtn">🖨️ Imprimir</button>
+                        </div>
+                    </div>
+
+                    ${this.showForm ? `
+                        <div class="form-section">
+                            <div class="form-content">
+                                <form id="certificateForm" class="form-grid">
+                                    <input type="text" id="titleInput" placeholder="Título do curso" value="${this.formData.title}">
+                                    <input type="text" id="platformInput" placeholder="Plataforma (ex: Udemy)" value="${this.formData.platform}">
+                                    <input type="date" id="dateInput" value="${this.formData.date}">
+                                    <input type="text" id="categoryInput" placeholder="Categoria" value="${this.formData.category}">
+                                    <input type="url" id="linkInput" placeholder="Link (opcional)" value="${this.formData.link}">
+                                    
+                                    <div class="file-input-wrapper">
+                                        <label class="file-input-label">Imagens ou PDFs (até 5 arquivos)</label>
+                                        <label class="file-input-btn">
+                                            📎 Selecionar arquivos
+                                            <input type="file" id="fileInput" accept="image/*,.pdf" multiple>
+                                        </label>
+                                    </div>
+
+                                    <div id="filePreviewWrapper">
+                                        ${this.selectedFiles.length > 0 ? `
+                                            <div class="file-preview">
+                                                ${this.selectedFiles.map((file, idx) => `
+                                                    <div class="preview-item">
+                                                        ${file.type.includes('image') ? 
+                                                            `<img src="${file.preview}" alt="preview">` :
+                                                            `<div class="pdf-preview">📄</div>`
+                                                        }
+                                                        <button type="button" class="remove-preview" data-index="${idx}">✕</button>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        ` : ''}
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-success">✅ Adicionar</button>
+                                        <button type="button" class="btn btn-secondary" id="cancelBtn">❌ Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <div class="gallery">
+                        ${this.certificates.length === 0 ? `
+                            <div class="empty-state">
+                                <p>Nenhum certificado ainda. Clique em "Adicionar" para começar!</p>
+                            </div>
+                        ` : `
+                            <div class="grid" id="certificatesGrid"></div>
+                        `}
+                    </div>
+
+                    <div id="fileModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Visualizar Arquivo</h2>
+                                <button class="modal-close" onclick="portfolio.closeModal('fileModal')">✕</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="file-viewer" id="fileViewer"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                app.innerHTML = html;
+                this.renderCertificateGrid();
+                this.attachEventListeners();
+            }
+
+            renderCertificateGrid() {
+                const grid = document.getElementById('certificatesGrid');
+                if (!grid) return;
+
+                const searchTerm = document.getElementById('searchInput')?.value || '';
+                const selectedCategory = document.getElementById('categoryFilter')?.value || '';
+                const filteredCerts = this.getFilteredCertificates(searchTerm, selectedCategory);
+
+                if (filteredCerts.length === 0 && this.certificates.length > 0) {
+                    grid.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;"><p>Nenhum resultado encontrado.</p></div>`;
+                    return;
+                }
+
+                grid.innerHTML = filteredCerts.map(cert => `
+                    <div class="card">
+                        ${cert.files.length > 0 ? `
+                            <div class="card-preview" onclick="portfolio.openFileViewer(${JSON.stringify(cert).replace(/"/g, '&quot;')}, 0)">
+                                ${cert.files[0].type.includes('image') ? 
+                                    `<img src="${cert.files[0].path}" alt="${cert.title}">` :
+                                    '📄'
+                                }
+                            </div>
+                        ` : ''}
+                        <div class="card-content">
+                            <div class="card-title">${cert.title}</div>
+                            <div class="card-meta">
+                                <strong>${cert.platform}</strong>
+                                ${cert.date ? ` • ${new Date(cert.date).toLocaleDateString('pt-BR')}` : ''}
+                            </div>
+                            ${cert.category ? `<span class="card-category">${cert.category}</span>` : ''}
+                            <div class="card-actions">
+                                ${cert.files.length > 0 ? `<button class="btn btn-primary" onclick="portfolio.openFileViewer(${JSON.stringify(cert).replace(/"/g, '&quot;')}, 0)">👁️ Ver</button>` : ''}
+                                ${cert.link ? `<a href="${cert.link}" target="_blank" class="btn btn-primary">🔗 Link</a>` : ''}
+                                <button class="btn btn-danger" onclick="portfolio.deleteCertificate(${cert.id})">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            attachEventListeners() {
+                const themeToggle = document.getElementById('themeToggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', () => this.toggleDarkMode());
+                }
+
+                const addBtn = document.getElementById('addBtn');
+                if (addBtn) {
+                    addBtn.addEventListener('click', () => this.toggleForm());
+                }
+
+                const cancelBtn = document.getElementById('cancelBtn');
+                if (cancelBtn) {
+                    cancelBtn.addEventListener('click', () => this.toggleForm());
+                }
+
+                const form = document.getElementById('certificateForm');
+                if (form) {
+                    form.addEventListener('submit', (e) => this.handleAddCertificate(e));
+                }
+
+                const titleInput = document.getElementById('titleInput');
+                if (titleInput) titleInput.addEventListener('change', (e) => this.formData.title = e.target.value);
+
+                const platformInput = document.getElementById('platformInput');
+                if (platformInput) platformInput.addEventListener('change', (e) => this.formData.platform = e.target.value);
+
+                const dateInput = document.getElementById('dateInput');
+                if (dateInput) dateInput.addEventListener('change', (e) => this.formData.date = e.target.value);
+
+                const categoryInput = document.getElementById('categoryInput');
+                if (categoryInput) categoryInput.addEventListener('change', (e) => this.formData.category = e.target.value);
+
+                const linkInput = document.getElementById('linkInput');
+                if (linkInput) linkInput.addEventListener('change', (e) => this.formData.link = e.target.value);
+
+                const fileInput = document.getElementById('fileInput');
+                if (fileInput) {
+                    fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+                }
+
+                const removeButtons = document.querySelectorAll('.remove-preview');
+                removeButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const index = parseInt(btn.dataset.index);
+                        this.removeFilePreview(index);
+                    });
+                });
+
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('input', () => this.renderCertificateGrid());
+                }
+
+                const categoryFilter = document.getElementById('categoryFilter');
+                if (categoryFilter) {
+                    categoryFilter.addEventListener('change', () => this.renderCertificateGrid());
+                }
+
+                const printBtn = document.getElementById('printBtn');
+                if (printBtn) {
+                    printBtn.addEventListener('click', () => window.print());
+                }
+
+                document.addEventListener('click', (e) => {
+                    if (e.target.id === 'fileModal') {
+                        e.target.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Inicializar
+        let portfolio;
+        function init() {
+            const app = document.getElementById('app');
+            if (!app) {
+                setTimeout(init, 100);
+                return;
+            }
+            portfolio = new CertificatePortfolio();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>

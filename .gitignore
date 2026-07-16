@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Arquivos de upload (seus PDFs/imagens ficam privados)
+uploads/*
+!uploads/.gitkeep
+
+# Dados dos certificados (seus dados privados - não versionar)
+certificados.json
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
